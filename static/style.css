@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #000000;
+}
+.connection {
+    margin: auto;
+    padding: 20px;
+    background-color: #909090;
+}
+.connection a {
+    padding: 20px;
+    text-decoration: none;
+    color: #fff;
+}
+.connection a:hover {
+    color: deeppink;
+}
+
+table {
+    border-collapse: collapse;
+    width: 400px;
+    border: 2px solid #18c1ff;
+    margin: auto; /* 使用 margin: 20px auto; 讓表格水平置中 */
+    text-align: left;
+    background-color: #000;
+    color: #fff;
+}
+
+table a {
+    text-decoration: none;
+    color: #fff;
+}
+
+table a:hover {
+    color: #6ac9fc;
+}
+
+.bgc {
+    background-image: url(/static/bg1.jpeg);
+    background-size: cover;
+    margin: auto;
+    padding: auto;
+}
+
+h2, h3, h6 {
+    background-color: beige;
+    margin: auto;
+    width: 900px;
+}
+
+.hidiv {
+    font-size: small;
+    background-color: darkseagreen;
+    color: white;
+}
+
+footer {
+    background-color: beige;
+    margin: auto;
+    width: 900px;
+}
+
+.bgc2 {
+    width: 900px;
+    background-color: rgba(255, 255, 255, 0.3); /* rgba設定透明度 */
+    margin: auto;
+}

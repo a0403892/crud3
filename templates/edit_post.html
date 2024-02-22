@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改文章</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table {
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection">
+        <a href="/user_profile">基本資料</a>
+        <a href="/blog">網誌</a>
+        <a href="/album">相簿</a>
+        <a href="/board">留言板</a>
+    </div>
+    <div class="bgc">
+        <div class="bgc2">
+            <div>
+                <h2>修改文章</h2>
+            </div>
+            <form action="/edit_success/{{id}}" method="post" onsubmit="return showSuccessMessage();">
+                {% csrf_token %}
+                <input type="hidden" name="article_id" value="{{id}}">
+                <table border="1">
+                    <tr style="text-align: center;">
+                        <th>標題：<input type="text" name="title" value="{{title}}"></th>
+                        <tr>
+                            <td style="text-align: center;">
+                                內容：<textarea name="content" cols="30" rows="20">{{content}}</textarea>                    
+                            </td>
+                        </tr>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <a href="#" class="back-btn" onclick="history.go(-1)">返回上一頁</a>
+                            <button type="submit">確定</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <script>
+        function showSuccessMessage() {
+            // 在這裡添加提示訊息
+            alert('修改成功！');
+            // 返回 true 表示繼續提交表單，返回 false 則取消提交
+            return true;
+        }
+    </script>
+</body>
+</html>

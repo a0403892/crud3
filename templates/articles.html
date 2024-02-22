@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table {
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection">
+        <a href="/user_profile">基本資料</a>
+        <a href="/blog">網誌</a>
+        <a href="/album">相簿</a>
+        <a href="/board">留言板</a>
+    </div>
+    <h2>Welcome to Rain's blog</h2>
+    <div class="bgc">
+        <div class="bgc2">
+            <br>
+            <table border="1">
+                <tr>
+                    <th style="text-align: left; color: rgb(189, 255, 189); font-size: 24px;">{{title}}</th>
+                    <tr>
+                        <td>
+                            {{content|linebreaksbr}}                    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">發表日期：{{datestart}}</td>
+                    </tr>
+                    {% if datestart != datelast %}
+                    <tr>
+                        <td style="text-align: right">最後編輯：{{datelast}}</td>
+                    </tr>
+                    {% endif %}
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <a href="/blog" style="text-decoration: none; color: white;">回到網誌</a>
+</body>
+</html>

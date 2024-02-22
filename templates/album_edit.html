@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改相簿</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection">
+        <a href="/user_profile">基本資料</a>
+        <a href="/blog">網誌</a>
+        <a href="/album">相簿</a>
+        <a href="/board">留言板</a>
+    </div>
+    <div class="bgc">
+        <div class="bgc2">
+            <h2>修改相簿</h2>
+            <form method="post" action="/album_edit_success/{{id}}">
+                {% csrf_token %}
+                <input type="hidden" name="albumid" value="{{id}}">
+                <p>相簿名稱：</p><input type="text" name="album" value="{{atitle}}"><hr>
+                <p>相簿描述：</p><textarea name="desc" cols="30" rows="10">{{adesc}}</textarea><br>
+                <a href="#" class="back-btn" onclick="history.go(-1)">返回上一頁</a>
+                <input type="submit" value="確定">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

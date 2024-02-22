@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain的留言板</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .main {
+            width: 400px;
+            text-align: left;
+            margin: auto;
+            background-color: #beb3f0;
+            padding: 20px;
+            border: 3px solid white;
+
+        }
+        .pagination {
+            text-align: center;
+        }
+        .post_message {
+            text-align: center;
+        }
+        .message {
+            background-color: rgb(32, 99, 207);
+            border: 3px solid black;
+            text-align: left;
+            color:#ffffff;
+            border-radius: 10px;
+        }
+        .userinfo {
+            font-size: 16px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection">
+        <a href="user_profile">基本資料</a>
+        <a href="blog">網誌</a>
+        <a href="album">相簿</a>
+        <a href="board">留言板</a>
+    </div>
+    <h2>留言給{{nickname}}</h2>
+    <div class="bgc">
+        <div class="bgc2">
+            {% if request.session.name %}
+            Welcome, <span style="color: fuchsia; font-size: 20px;">{{ request.session.name }}!</span>
+            {% else %}
+            Welcome, <span style="color: fuchsia; font-size: 20px;">遊客!</span>
+            {% endif %}
+            <div class="main">
+                {% for i in messagedata %}
+                <div class="message">
+                    <p>{{ i.message|linebreaksbr }}</p>
+                </div>
+                <div class="userinfo">
+                    {% if i.useruser != '遊客' %}
+                    <p style="margin: 10px;">
+                        <a href="mailto:{{i.useremail}}">{{i.useruser}}</a> 留言於 {{i.date}}
+                    </p>
+                    {% endif %}
+                    {% if i.useruser == '遊客' %}
+                    <p style="margin: 10px;">
+                        遊客 留言於 {{i.date}}
+                    </p>
+                    {% endif %}
+                    {% if request.session.name == 'rain' %}
+                    <a href="/delete_message/{{i.id}}" onclick="return confirmDelete();">刪除</a>
+                    {% endif %}
+                </div>
+                <hr>
+                {% endfor %}
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if messagedata.has_previous %}
+                            <a href="?page=1">&laquo; 第一頁</a>
+                            <a href="?page={{ messagedata.previous_page_number }}">上一頁</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ messagedata.number }} of {{ messagedata.paginator.num_pages }}.
+                        </span>
+
+                        {% if messagedata.has_next %}
+                            <a href="?page={{ messagedata.next_page_number }}">下一頁</a>
+                            <a href="?page={{ messagedata.paginator.num_pages }}">最後一頁 &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+    <footer>
+        <div class="post_message">
+            <a href="post_message">留點什麼吧...</a>
+        </div>
+        {% if request.session.name %}
+        <a href="logout">登出</a>
+        {% else %}
+        <a href="/">登入</a>
+        {% endif %}
+    </footer>
+    <!-- 確定要刪除嗎？ -->
+    <script>
+        function confirmDelete() {
+            return confirm('確定要刪除嗎？');
+        }
+    </script>
+</body>
+</html>

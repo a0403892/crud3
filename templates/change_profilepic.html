@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上傳大頭貼</title>
+</head>
+<body style="text-align: center;">
+    <h2>上傳個人大頭貼</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="#" class="back-btn" onclick="history.go(-1)">返回上一頁</a>
+        <button type="submit">上傳</button>
+    </form>
+</body>
+</html>

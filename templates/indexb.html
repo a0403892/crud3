@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD練習</title>
+</head>
+<body>
+    <form action="blog" method="post">
+        {% csrf_token %}
+        帳號：<input type="text" name="username"><br>
+        密碼：<input type="password" name="password"><br>
+        <hr>
+        <input type="submit" value="登入">
+    </form>
+    <a href="/create_account">註冊帳號</a><br>
+    <a href="#">忘記密碼</a>
+</body>
+</html>

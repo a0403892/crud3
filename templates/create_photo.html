@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增相片</title>
+    <!-- 不知道為什麼出現了一個內建的ul列表 -->
+    <!-- 只好把它設為隱藏 -->
+    <style>
+        ul {
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <h2>{{title}}</h2>
+    <h4>新增相片</h4>
+    <!-- 不設定 action，讓它回到預設的當前頁面 -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        相片描述：<input type="text" name="desc">
+        <br>
+        <hr>
+        <a href="/album/{{id}}">返回「{{title}}」</a>
+        <button type="submit">Upload Image</button>
+    </form>
+    {% if request.method == 'POST' and form.is_valid %}
+    <p style="color: red;">新增相片成功！</p>
+    <a href="/album/{{albumid}}">回到相簿</a>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>發表留言</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="connection">
+        <a href="user_profile">基本資料</a>
+        <a href="blog">網誌</a>
+        <a href="album">相簿</a>
+        <a href="board">留言板</a>
+    </div>
+    <h2>留點什麼吧...</h2>
+    <div class="bgc">
+        <div class="bgc2">
+            {% if request.session.name %}
+            Welcome, <span style="color: fuchsia; font-size: 20px;">{{ request.session.name }}!</span>
+            {% else %}
+            Welcome, <span style="color: fuchsia; font-size: 20px;">遊客!</span>
+            {% endif %}
+            <form action="post_message_success" method="post">
+                {% csrf_token %}
+                <textarea name="boardmessage" id="" cols="50" rows="10"></textarea>
+                <br>
+                <button type="submit">送出留言</button>
+            </form>
+        </div>
+    </div>
+    <a href="/board" style="text-decoration: none; color: white;">回到留言板</a>
+</body>
+</html>

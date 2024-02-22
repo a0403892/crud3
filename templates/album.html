@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain的相簿</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .main {
+            width: 800px;
+            font-family: Arial, sans-serif;
+            margin: auto; /* 使用 auto 將容器水平居中 */
+            padding: 20px;
+            background-color: rgba(224, 224, 224, 0.3);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4列 */
+            gap: 10px; /* 設置圖片之間的間距 */
+            justify-content: space-around;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid white;
+        }
+        img {
+            width: auto; /* 圖片寬度自動 */
+            height: 120px; /* 保持原始比例 */
+            object-fit: cover; /* 保持圖片比例並填滿容器 */
+            margin: auto; /* 使用 auto 實現水平和垂直居中 */
+            display: block; /* 避免預設行內元素的底部間距 */
+        }
+        .albumtitle {
+            margin-top: 10px; /* 添加文字與圖片之間的上邊距 */
+        }
+        .actions {
+            margin-top: 10px;  /* 添加上邊距 */
+        }
+    </style>    
+</head>
+<body>
+    <div class="connection">
+        <a href="user_profile">基本資料</a>
+        <a href="blog">網誌</a>
+        <a href="album">相簿</a>
+        <a href="board">留言板</a>
+    </div>
+    {% if request.session.name and request.session.name != 'rain' %}
+    <div class="hidiv">{{ name }} 您好! </div>
+    {% endif %}
+    <h2>Welcome to Rain's album</h2>
+    <h3>{{ albums|length }} 本相簿</h3>
+    <div class="bgc">
+        <div class="bgc2">
+            <br>
+            <div class="main">
+                {% for entry in photos %}
+                <div>
+                    <a href="album/{{ entry.album.id }}" style="text-decoration: none; color: white;">
+                        {% if entry.photo %}
+                        <img src="{{ entry.photo.image.url }}" alt="{{ entry.album.atitle }}" style="width: 120px; height: 120px;">
+                        {% else %}
+                        <img src="/static/nopic.png" alt="No Image">
+                        {% endif %}
+                        <div class="albumtitle">{{ entry.album.atitle }}</div>
+                        <p style="font-size: x-small;">{{ entry.imagelens }}張相片</p>
+                    </a>
+                    {% if request.session.name == 'rain' %}
+                    <div class="actions">
+                        <a href="album_edit/{{ entry.album.id }}">修改</a>
+                        <a href="album_delete/{{ entry.album.id }}" onclick="return confirmDelete();">刪除</a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        <br>
+    </div>
+    </div>
+    <footer>
+        {% if request.session.name == 'rain' %}
+        <a href="create_album">新增相簿</a><br>
+        <a href="logout">登出</a>
+        {% elif request.session.name == None %}
+        <a href="/">登入</a>
+        {% else %}
+        <a href="logout">登出</a>
+        {% endif %}
+    </footer>
+    <script>
+        function confirmDelete() {
+            return confirm('確定要刪除嗎？');
+        }
+    </script>
+</body>
+</html>

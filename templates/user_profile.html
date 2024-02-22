@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain的首頁</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* .propic {
+            max-width: 600px;
+            margin: auto;
+            background-color: #000000;
+            padding: 20px;
+        } */
+        .proinfo {
+            max-width: 600px; /* 設置最大寬度 */
+            margin: auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection">
+        <a href="user_profile">基本資料</a>
+        <a href="blog">網誌</a>
+        <a href="album">相簿</a>
+        <a href="board">留言板</a>
+    </div>
+    {% if request.session.name and request.session.name != 'rain' %}
+    <div class="hidiv">{{ name }} 您好! </div>
+    {% endif %}
+    <h2>Welcome to Rain's homepage</h2>
+    <div class="bgc">
+        <div class="bgc2">
+            <br>
+            <div class="propic">
+                {% if profilepic.url %}
+                <img src={{profilepic.url}} alt="" style="width: auto; height: 350px">
+                {% else %}
+                <img src="/static/nopic.png" alt="No Image" style="width: auto; height: 350px">
+                {% endif %}
+                <br>
+            </div>
+            <hr>
+            <div class="proinfo">
+                <table border="3">
+                    <tr>
+                        <th style="width: 80px;">暱稱</th><td>{{nickname}}</td>
+                    </tr>
+                    <tr>
+                        <th>年齡</th><td>{{age}}</td>
+                    </tr>
+                    {% if gender != '不顯示' or request.session.name == 'rain' %}
+                    <tr>
+                        <th>性別</th><td>{{gender}}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <th>喜歡的</th><td>{{likes}}</td>
+                    </tr>
+                    <tr>
+                        <th>討厭的</th><td>{{dislikes}}</td>
+                    </tr>
+                    <tr>
+                        <th>關於我</th><td>{{aboutme}}</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+        </div>
+    </div>
+    <footer>
+        {% if request.session.name == 'rain' %}
+        <a href="change_profilepic">修改個人大頭貼</a><br>
+        <a href="change_profile">修改個人說明檔</a><br>
+        <a href="logout">登出</a>
+        {% elif request.session.name == None %}
+        <a href="/">登入</a>
+        {% else %}
+        <a href="logout">登出</a>
+        {% endif %}
+    </footer>
+</body>
+</html>

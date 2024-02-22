@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改個人說明檔</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection">
+        <a href="/user_profile">基本資料</a>
+        <a href="/blog">網誌</a>
+        <a href="/album">相簿</a>
+        <a href="/board">留言板</a>
+    </div>
+    <h2>修改個人說明檔</h2>
+    <div class="bgc">
+        <div class="bgc2">
+            <form method="post" action="change_profile_success">
+                {% csrf_token %}
+                暱稱：<input type="text" name="nickname" value='{{nickname}}'required><hr>
+                年齡：<input type="text" name="age" value='{{age}}' required><hr>
+                性別：
+                <input type="radio" name="gender" value="男" {% if gender == '男' %}checked{% endif %}> 男性
+                <input type="radio" name="gender" value="女" {% if gender == '女' %}checked{% endif %}> 女性
+                <input type="radio" name="gender" value="不顯示" {% if gender == '不顯示' %}checked{% endif %}> 不顯示
+                <hr>
+                喜歡的：<input type="text" name="likes" value='{{likes}}'><hr>
+                討厭的：<input type="text" name="dislikes" value='{{dislikes}}'><hr>
+                關於我：<textarea name="aboutme"cols="30" rows="10">{{ aboutme }}</textarea><br>
+                <a href="#" class="back-btn" onclick="history.go(-1)">返回上一頁</a>
+                <input type="submit" value="確定">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

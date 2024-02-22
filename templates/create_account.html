@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>註冊帳號</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            padding-top: 5%;
+            text-align: center;
+        }
+        table {
+            width: 248px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        h1 {
+            font-size: 20px;
+            color: white;
+            margin: 0;
+            padding-bottom: 5%;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>註冊帳號</h1>
+    <form method="post" action="create_success">
+        {% csrf_token %}
+        <table border="3">
+            <tr>
+                <td>帳號</td><td><input type="text" name="username" required></td>
+            </tr>
+            <tr>
+                <td>E-mail</td><td><input type="email" name="email" required></td>
+            </tr>
+            <tr>
+                <td>密碼</td><td><input type="password" name="password" required></td>
+            </tr>
+            <tr>
+                <td>確認密碼</td><td><input type="password" name="confirm_password" required></td>
+            </tr>
+        </table>
+        <br>
+        <button type="submit">註冊</button><br>
+        <span style="color: red;">{{ message }}</span>
+    </form>
+</body>
+</html>

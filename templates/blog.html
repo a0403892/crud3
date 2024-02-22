@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain的網誌</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .bgc {
+            background-image: url(/static/bg1.jpeg);
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection">
+        <a href="user_profile">基本資料</a>
+        <a href="blog">網誌</a>
+        <a href="album">相簿</a>
+        <a href="board">留言板</a>
+    </div>
+    {% if request.session.name and request.session.name != 'rain' %}
+    <div class="hidiv">{{ name }} 您好! </div>
+    {% endif %}
+    <h2>Welcome to Rain's blog</h2>
+    <div class="bgc">
+        <div class="bgc2">
+            <br>
+            <table border="3">
+                <tr>
+                    <th>文章標題</th><th>發表日期</th>
+                    {% for article in articles %}
+                    <tr>
+                        <td><a href="articles/{{article.id}}">{{article.title}}</a></td>
+                        <td>{{article.datestart|date:"Y-m-d"}}</td>
+                        {% if request.session.name == 'rain' %}
+                        <td><a href="edit_post/{{article.id}}">編輯</a></td>
+                        <td><a href="delete_post/{{article.id}}" onclick="return confirmDelete();">刪除</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <footer>
+        {% if request.session.name == 'rain' %}
+        <a href="new_post">發表文章</a><br>
+        <a href="logout">登出</a>
+        {% elif request.session.name == None %}
+        <a href="/">登入</a>
+        {% else %}
+        <a href="logout">登出</a>
+        {% endif %}
+    </footer>
+    <!-- 確定要刪除嗎？ -->
+    <script>
+        function confirmDelete() {
+            return confirm('確定要刪除嗎？');
+        }
+    </script>
+</body>
+</html>
