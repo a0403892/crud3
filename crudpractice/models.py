@@ -67,6 +67,6 @@ class BoardModel(models.Model):
     message = models.TextField(max_length=2000, null=False)
     date = models.DateTimeField()
     useruser = models.CharField(max_length=20)
-    useremail = models.EmailField(max_length=100, default='')
+    useremail = models.EmailField(max_length=100, default='', blank=True)
     def __str__(self):
         return f"{self.id} - {self.message} - {self.useruser}"

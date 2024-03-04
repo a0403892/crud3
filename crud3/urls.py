@@ -59,12 +59,6 @@ urlpatterns = [
     path('post_message_success', views.post_message_success),
     path('delete_message/<int:boardid>', views.delete_message),
     path('guest', views.guest),
-
-
-
-    path('v', views.v),
-    path('test/<int:articleid>', views.test),
-    path('a', views.a),
 ]
 # 在網頁中訪問 MEDIA_URL 中的媒體文件時，Django 將從 MEDIA_ROOT 中提供這些文件。
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

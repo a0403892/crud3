@@ -47,9 +47,9 @@
     <div class="bgc">
         <div class="bgc2">
             {% if request.session.name %}
-            Welcome, <span style="color: fuchsia; font-size: 20px;">{{ request.session.name }}!</span>
+            Welcome, <span style="color: rgb(255, 255, 255); font-size: 20px;">{{ request.session.name }}!</span>
             {% else %}
-            Welcome, <span style="color: fuchsia; font-size: 20px;">遊客!</span>
+            Welcome, <span style="color: rgb(255, 255, 255); font-size: 20px;">遊客!</span>
             {% endif %}
             <div class="main">
                 {% for i in messagedata %}
